@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 
-import FormInput from '../FormInput/FormInput';
+import FormInput from '../form-input/form-input.component';
 
-import './SignIn.scss';
-import CustomButton from '../CustomButton/CustomButton';
+import './sign-in.styles.scss';
+
+import CustomButton from '../custom-button/custom-button.component';
 
 export default class SignIn extends Component {
     constructor(props) {
