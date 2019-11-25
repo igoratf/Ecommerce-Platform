@@ -35,7 +35,9 @@ class App extends Component {
             }
           })
         });
+      }
 
+      else {
         this.setState({
           currentUser: userAuth
         })
@@ -55,17 +57,17 @@ class App extends Component {
   }
 
   render() {
-  return (
-    <div className="App">
-      <Header currentUser={this.state.currentUser}/>
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/shop" component={ShopPage} />
-        <Route path="/signin" test="test" component={SignInAndUpPage} />
-      </Switch>
-    </div>
-  );
-}
+    return (
+      <div className="App">
+        <Header currentUser={this.state.currentUser} />
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/shop" component={ShopPage} />
+          <Route path="/signin" test="test" component={SignInAndUpPage} />
+        </Switch>
+      </div>
+    );
+  }
 }
 
 export default App;
