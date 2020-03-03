@@ -20,7 +20,7 @@ class App extends Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser } = this.props;
+    const { setCurrentUser} = this.props;
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
@@ -29,8 +29,8 @@ class App extends Component {
 
         userRef.onSnapshot(snapShot => {
           setCurrentUser({
-              id: snapShot.id,
-              ...snapShot.data()
+            id: snapShot.id,
+            ...snapShot.data()
           });
         });
       }
@@ -41,10 +41,6 @@ class App extends Component {
     });
 
     console.log('UNSUBSCRIBED AUTH ', this.unsubscribeFromAuth);
-  }
-
-  componentDidUpdate() {
-    console.log('STATE ', this.state);
   }
 
   componentWillUnmount() {
@@ -62,13 +58,13 @@ class App extends Component {
           <Route exact path="/" component={HomePage} />
           <Route path="/shop" component={ShopPage} />
           <Route exact path="/checkout" component={CheckoutPage} />
-          <Route exact 
-          path="/signin" 
-          render={() => 
-            currentUser ? 
-            (<Redirect to="/" />) 
-            : 
-            (<SignInAndUpPage />)} />
+          <Route exact
+            path="/signin"
+            render={() =>
+              currentUser ?
+                (<Redirect to="/" />)
+                :
+                (<SignInAndUpPage />)} />
         </Switch>
       </div>
     );
@@ -84,4 +80,4 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 
-export default connect(mapStateToProps, mapDispatchToProps) (App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
