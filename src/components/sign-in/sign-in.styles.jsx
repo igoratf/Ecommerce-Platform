@@ -6,7 +6,7 @@ export const SignInContainer = styled.div`
   flex-direction: column;
 
   @media screen and (max-width: 800px) {
-      padding: 0 10px;
+      padding: 0 20px;
   }
 `;
 

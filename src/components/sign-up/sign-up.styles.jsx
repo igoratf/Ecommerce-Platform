@@ -6,7 +6,7 @@ export const SignUpContainer = styled.div`
   width: 380px;
 
   @media screen and (max-width: 800px) {
-    padding: 10px;
+    padding: 20px;
 }
 `;
 
