@@ -6,9 +6,10 @@ import { selectIsSigningUp } from '../../redux/user/user.selectors';
 
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
+import { ButtonOnLoading } from '../custom-button/custom-button.styles';
 
 import { SignUpContainer, SignUpTitle } from './sign-up.styles';
-import { SpinnerContainer } from '../with-spinner/with-spinner.styles';
+import { ButtonSpinner } from '../with-spinner/with-spinner.styles';
 
 import { signUpStart } from '../../redux/user/user.actions';
 
@@ -77,7 +78,9 @@ const SignUp = ({ signUpStart, isSigningUp }) => {
                     required />
 
                 { isSigningUp ? 
-                    <SpinnerContainer />
+                    <ButtonOnLoading>
+                        <ButtonSpinner />
+                    </ButtonOnLoading>
                     :
                 <CustomButton type="submit">SIGN UP</CustomButton>
                 }

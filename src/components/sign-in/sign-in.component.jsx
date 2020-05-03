@@ -4,12 +4,13 @@ import { createStructuredSelector } from 'reselect';
 
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
+import { ButtonOnLoading } from '../custom-button/custom-button.styles';
 
 import { googleSignInStart, emailSignInStart } from '../../redux/user/user.actions';
 
 import { selectIsSigningIn } from '../../redux/user/user.selectors';
 
-import { SpinnerContainer } from '../with-spinner/with-spinner.styles';
+import { ButtonSpinner } from '../with-spinner/with-spinner.styles';
 
 import {
     SignInContainer,
@@ -29,6 +30,7 @@ const SignIn = ({ emailSignInStart, googleSignInStart, isSigningIn }) => {
     }
 
     const handleChange = (event) => {
+
         const { value, name } = event.target;
         
         setUserCredentials({...userCredentials, [name]: value });
@@ -58,7 +60,9 @@ const SignIn = ({ emailSignInStart, googleSignInStart, isSigningIn }) => {
                     required />
 
                 <ButtonsBarContainer>
-                    { isSigningIn ? <SpinnerContainer /> : <CustomButton type="submit"> Sign In</CustomButton> }
+                    { isSigningIn ? <ButtonOnLoading>
+                        <ButtonSpinner/>
+                    </ButtonOnLoading> : <CustomButton type="submit"> Sign In</CustomButton> }
                     <CustomButton type="button" isGoogleSignIn onClick={googleSignInStart}> Sign In with Google</CustomButton>
                 </ButtonsBarContainer>
             </form>
