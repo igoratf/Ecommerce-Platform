@@ -1,30 +1,29 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+
+import { selectIsSigningUp } from '../../redux/user/user.selectors';
 
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
 import { SignUpContainer, SignUpTitle } from './sign-up.styles';
+import { SpinnerContainer } from '../with-spinner/with-spinner.styles';
 
 import { signUpStart } from '../../redux/user/user.actions';
 
-class SignUp extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            displayName: '',
-            email: '',
-            password: '',
-            confirmPassword: ''
-        }
-    }
+const SignUp = ({ signUpStart, isSigningUp }) => {
+    const [userCredentials, setUserCredentials] = useState({
+        displayName: '',
+        email: '',
+        password: '',
+        confirmPassword: ''
+    });
 
-    handleSubmit = async (event) => {
+    const { displayName, email, password, confirmPassword } = userCredentials;
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
-
-        const { displayName, email, password, confirmPassword } = this.state;
-        const { signUpStart } = this.props;
-
         if (password !== confirmPassword) {
             alert("Passwords don't match");
             return;
@@ -34,61 +33,65 @@ class SignUp extends Component {
 
     }
 
-    handleChange = (event) => {
+    const handleChange = (event) => {
         const { name, value } = event.target;
 
-        this.setState({[name]: value});
+        setUserCredentials({ ...userCredentials, [name]: value });
     }
 
-    render() {
-        const { displayName, email, password, confirmPassword } = this.state;
-        return (
-            <SignUpContainer>
-                <SignUpTitle>I do not have an account</SignUpTitle>
-                <span>Sign up with your email and password</span>
-                <form onSubmit={this.handleSubmit}>
-                    <FormInput
+    return (
+        <SignUpContainer>
+            <SignUpTitle>I do not have an account</SignUpTitle>
+            <span>Sign up with your email and password</span>
+            <form onSubmit={handleSubmit}>
+                <FormInput
                     type="text"
                     name="displayName"
                     value={displayName}
-                    onChange={this.handleChange}
+                    onChange={handleChange}
                     label="Display Name"
                     required />
 
-                    <FormInput
+                <FormInput
                     type="email"
                     name="email"
                     value={email}
-                    onChange={this.handleChange}
+                    onChange={handleChange}
                     label="Email"
                     required />
 
-                    <FormInput
+                <FormInput
                     type="password"
                     name="password"
                     value={password}
-                    onChange={this.handleChange}
+                    onChange={handleChange}
                     label="Password"
                     required />
 
-                    <FormInput
+                <FormInput
                     type="password"
                     name="confirmPassword"
                     value={confirmPassword}
-                    onChange={this.handleChange}
+                    onChange={handleChange}
                     label="Confirm Password"
                     required />
 
-                    <CustomButton type="submit">SIGN UP</CustomButton>
-                </form>
-            </SignUpContainer>
-        )
-    }
+                { isSigningUp ? 
+                    <SpinnerContainer />
+                    :
+                <CustomButton type="submit">SIGN UP</CustomButton>
+                }
+            </form>
+        </SignUpContainer>
+    )
 }
 
-
-const mapDispatchToprops = dispatch => ({
-    signUpStart: (displayName, email, password) => dispatch(signUpStart({displayName, email, password}))
+const mapStateToProps = createStructuredSelector({
+    isSigningUp: selectIsSigningUp
 });
 
-export default connect(null, mapDispatchToprops) (SignUp);
+const mapDispatchToprops = dispatch => ({
+    signUpStart: (displayName, email, password) => dispatch(signUpStart({ displayName, email, password }))
+});
+
+export default connect(mapStateToProps, mapDispatchToprops)(SignUp);

@@ -17,5 +17,4 @@ const SignInAndUpContainer = styled.div`
     }
 `;
 
-
 export default SignInAndUpContainer;

@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
 import { googleSignInStart, emailSignInStart } from '../../redux/user/user.actions';
+
+import { selectIsSigningIn } from '../../redux/user/user.selectors';
+
+import { SpinnerContainer } from '../with-spinner/with-spinner.styles';
 
 import {
     SignInContainer,
@@ -12,7 +17,7 @@ import {
     ButtonsBarContainer
 } from './sign-in.styles';
 
-const SignIn = ({ emailSignInStart, googleSignInStart }) => {
+const SignIn = ({ emailSignInStart, googleSignInStart, isSigningIn }) => {
     const [userCredentials, setUserCredentials] = useState({email: '', password: ''});
 
     const { email, password } = userCredentials;
@@ -53,7 +58,7 @@ const SignIn = ({ emailSignInStart, googleSignInStart }) => {
                     required />
 
                 <ButtonsBarContainer>
-                    <CustomButton type="submit"> Sign In</CustomButton>
+                    { isSigningIn ? <SpinnerContainer /> : <CustomButton type="submit"> Sign In</CustomButton> }
                     <CustomButton type="button" isGoogleSignIn onClick={googleSignInStart}> Sign In with Google</CustomButton>
                 </ButtonsBarContainer>
             </form>
@@ -61,9 +66,13 @@ const SignIn = ({ emailSignInStart, googleSignInStart }) => {
     )
 }
 
+const mapStateToProps = createStructuredSelector({
+    isSigningIn: selectIsSigningIn
+})
+
 const mapDispatchToProps = (dispatch) => ({
     googleSignInStart: () => dispatch(googleSignInStart()),
     emailSignInStart: (email, password) => dispatch(emailSignInStart({ email, password }))
 })
 
-export default connect(null, mapDispatchToProps)(SignIn);
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
