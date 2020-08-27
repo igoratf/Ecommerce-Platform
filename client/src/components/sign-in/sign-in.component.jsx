@@ -10,7 +10,7 @@ import { googleSignInStart, emailSignInStart } from '../../redux/user/user.actio
 
 import { selectIsSigningIn } from '../../redux/user/user.selectors';
 
-import { ButtonSpinner } from '../with-spinner/with-spinner.styles';
+import { ButtonSpinner } from '../spinner/spinner.styles';
 
 import {
     SignInContainer,

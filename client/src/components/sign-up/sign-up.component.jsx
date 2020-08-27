@@ -9,7 +9,7 @@ import CustomButton from '../custom-button/custom-button.component';
 import { ButtonOnLoading } from '../custom-button/custom-button.styles';
 
 import { SignUpContainer, SignUpTitle } from './sign-up.styles';
-import { ButtonSpinner } from '../with-spinner/with-spinner.styles';
+import { ButtonSpinner } from '../spinner/spinner.styles';
 
 import { signUpStart } from '../../redux/user/user.actions';
 
