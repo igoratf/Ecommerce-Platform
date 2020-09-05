@@ -8,7 +8,7 @@
   </a>
 </p>
 
-> An E-commerce Platform developed using React.js, Redux, Redux-Sagas, Styled Components and Firebase. Developed along the Complete React Developer in 2020 (w/Redux, Hooks, GraphQL) course from Zero to Mastery.
+> An E-commerce Platform developed using React.js, Redux, Redux-Sagas, Styled Components and Firebase. Developed along the Complete React Developer in 2020 (w/Redux, Hooks, GraphQL) course from Zero to Mastery. An alternate version was developed in a different repository to learn and practice GraphQL.
 
 ### 🏠 [Homepage](https://github.com/igoratf/Ecommerce-Platform)
 
