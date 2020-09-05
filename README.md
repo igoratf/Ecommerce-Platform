@@ -22,13 +22,13 @@
 ## Install
 
 ```sh
-npm install && npm run dev
+npm install
 ```
 
 ## Usage
 
 ```sh
-npm run start
+npm run dev
 ```
 
 ## Author
