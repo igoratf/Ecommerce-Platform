@@ -35,7 +35,7 @@ npm run dev
 
 👤 **Igor Farias**
 
-* Website: igoratf.github.io/portfolio
+* Website: [@igoratf](https://igoratf.github.io/portfolio)
 * Github: [@igoratf](https://github.com/igoratf)
 * LinkedIn: [@igoratf](https://linkedin.com/in/igoratf)
 
