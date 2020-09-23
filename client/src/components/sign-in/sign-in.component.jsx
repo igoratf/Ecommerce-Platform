@@ -18,7 +18,7 @@ import {
     ButtonsBarContainer
 } from './sign-in.styles';
 
-const SignIn = ({ emailSignInStart, googleSignInStart, isSigningIn }) => {
+export const SignIn = ({ emailSignInStart, googleSignInStart, isSigningIn }) => {
     const [userCredentials, setUserCredentials] = useState({email: '', password: ''});
 
     const { email, password } = userCredentials;
@@ -42,7 +42,7 @@ const SignIn = ({ emailSignInStart, googleSignInStart, isSigningIn }) => {
             <SignInTitle>I already have an account</SignInTitle>
             <span>Sign in with your email and password</span>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} id="signInForm">
                 <FormInput
                     name="email"
                     type="email"

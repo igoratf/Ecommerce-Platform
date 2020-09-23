@@ -37,4 +37,7 @@ export const ButtonSpinner = styled.div`
   ${spinnerStyle}
   width: 25px;
   height: 25px;
-`
+`;
+
+
+ButtonSpinner.displayName = "ButtonSpinner";
