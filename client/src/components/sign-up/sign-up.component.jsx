@@ -13,7 +13,7 @@ import { ButtonSpinner } from '../spinner/spinner.styles';
 
 import { signUpStart } from '../../redux/user/user.actions';
 
-const SignUp = ({ signUpStart, isSigningUp }) => {
+export const SignUp = ({ signUpStart, isSigningUp }) => {
     const [userCredentials, setUserCredentials] = useState({
         displayName: '',
         email: '',
@@ -44,7 +44,7 @@ const SignUp = ({ signUpStart, isSigningUp }) => {
         <SignUpContainer>
             <SignUpTitle>I do not have an account</SignUpTitle>
             <span>Sign up with your email and password</span>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} id="signUpForm">
                 <FormInput
                     type="text"
                     name="displayName"
