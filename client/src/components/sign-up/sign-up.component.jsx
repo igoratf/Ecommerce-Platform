@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { selectIsSigningUp } from '../../redux/user/user.selectors';
 
@@ -13,13 +12,16 @@ import { ButtonSpinner } from '../spinner/spinner.styles';
 
 import { signUpStart } from '../../redux/user/user.actions';
 
-export const SignUp = ({ signUpStart, isSigningUp }) => {
+export const SignUp = () => {
     const [userCredentials, setUserCredentials] = useState({
         displayName: '',
         email: '',
         password: '',
         confirmPassword: ''
     });
+    const isSigningUp = useSelector(selectIsSigningUp);
+    const dispatch = useDispatch();
+    const signUpStartHandler = (displayName, email, password) => dispatch(signUpStart({ displayName, email, password }));
 
     const { displayName, email, password, confirmPassword } = userCredentials;
 
@@ -30,7 +32,7 @@ export const SignUp = ({ signUpStart, isSigningUp }) => {
             return;
         }
 
-        signUpStart(displayName, email, password);
+        signUpStartHandler(displayName, email, password);
 
     }
 
@@ -89,12 +91,4 @@ export const SignUp = ({ signUpStart, isSigningUp }) => {
     )
 }
 
-const mapStateToProps = createStructuredSelector({
-    isSigningUp: selectIsSigningUp
-});
-
-const mapDispatchToprops = dispatch => ({
-    signUpStart: (displayName, email, password) => dispatch(signUpStart({ displayName, email, password }))
-});
-
-export default connect(mapStateToProps, mapDispatchToprops)(SignUp);
+export default SignUp;
