@@ -1,33 +1,20 @@
 import React from 'react';
-import { shallow } from 'enzyme';
 import {CartIcon} from './cart-icon.component';
+import { fireEvent, render, screen } from '@testing-library/react';
+
+const mockToggleCartHidden = jest.fn();
 
 describe('CartIcon component', () => {
-  let wrapper;
-  let mockToggleCartHiden;
-  
-  beforeEach(() => {
-    mockToggleCartHiden = jest.fn();
-
-    const mockProps = {
-      itemCount: 0,
-      toggleCartHidden: mockToggleCartHiden
-    }
-
-    wrapper = shallow(<CartIcon {...mockProps} />);
+  it("should render correct item count", () => {
+    render(<CartIcon itemCount={10} toggleCartHidden={mockToggleCartHidden}/>);
+    const cartCountElement = screen.getByTestId('cart-count');
+    expect(cartCountElement.textContent).toBe("10");
   });
 
-  it('should render CartIcon component', () => {
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should call toggleCartHidden when icon is clicked', () => {
-    wrapper.find('.cart-icon').simulate('click');
-    expect(mockToggleCartHiden).toHaveBeenCalled();
-  });
-
-  it('should render itemCount text', () => {
-    const itemCount = parseInt(wrapper.find('.item-count').text());
-    expect(itemCount).toBe(0);
+  it("should call toggleCartHidden when container is clicked", () => {
+    render(<CartIcon itemCount={10} toggleCartHidden={mockToggleCartHidden}/>);
+    const cartContainerElement = screen.getByTestId("cart-container");
+    fireEvent.click(cartContainerElement);
+    expect(mockToggleCartHidden).toHaveBeenCalled();
   })
 })

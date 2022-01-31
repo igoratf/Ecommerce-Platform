@@ -19,7 +19,7 @@ export const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
   const { name, imageUrl, price, quantity } = cartItem;
 
   return (
-    <CheckoutItemContainer>
+    <CheckoutItemContainer data-testid="checkout-item">
       <ImageContainer>
         <img src={imageUrl} alt="item" />
       </ImageContainer>
