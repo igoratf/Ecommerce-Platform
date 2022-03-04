@@ -11,7 +11,9 @@
     "build": "cd client && npm run build",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "start": "node server.js",
-    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+    "install-packages": "npm install && cd 'client' && npm install",
+    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
+    "prepare": "husky install"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -24,6 +26,8 @@
   },
   "devDependencies": {
     "concurrently": "^6.3.0",
-    "nodemon": "^2.0.14"
+    "husky": "^7.0.0",
+    "nodemon": "^2.0.14",
+    "pretty-quick": "^3.1.3"
   }
 }

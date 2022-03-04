@@ -1,33 +1,33 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import {CartIcon} from './cart-icon.component';
+import React from "react";
+import { shallow } from "enzyme";
+import { CartIcon } from "./cart-icon.component";
 
-describe('CartIcon component', () => {
+describe("CartIcon component", () => {
   let wrapper;
   let mockToggleCartHiden;
-  
+
   beforeEach(() => {
     mockToggleCartHiden = jest.fn();
 
     const mockProps = {
       itemCount: 0,
-      toggleCartHidden: mockToggleCartHiden
-    }
+      toggleCartHidden: mockToggleCartHiden,
+    };
 
     wrapper = shallow(<CartIcon {...mockProps} />);
   });
 
-  it('should render CartIcon component', () => {
+  it("should render CartIcon component", () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should call toggleCartHidden when icon is clicked', () => {
-    wrapper.find('.cart-icon').simulate('click');
+  it("should call toggleCartHidden when icon is clicked", () => {
+    wrapper.find("CartContainer").simulate("click");
     expect(mockToggleCartHiden).toHaveBeenCalled();
   });
 
-  it('should render itemCount text', () => {
-    const itemCount = parseInt(wrapper.find('.item-count').text());
+  it("should render itemCount text", () => {
+    const itemCount = parseInt(wrapper.find("ItemCountContainer").text());
     expect(itemCount).toBe(0);
-  })
-})
+  });
+});
