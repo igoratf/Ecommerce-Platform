@@ -6,6 +6,20 @@ import { Provider } from "react-redux";
 
 import { ShopPage } from "./shop.component";
 
+import { auth } from "../../firebase/firebase.utils";
+
+jest.mock("firebase/compat/app", () => {
+  const auth = jest.fn();
+  const firestore = jest.fn();
+  const initializeApp = jest.fn();
+  auth.GoogleAuthProvider = jest.fn(() => ({ setCustomParameters: jest.fn() }));
+  return {
+    auth,
+    firestore,
+    initializeApp,
+  };
+});
+
 export const createMockStore = ({ state, reducers }) => {
   const store = createStore(combineReducers(reducers), state);
   return {
@@ -31,24 +45,24 @@ describe("ShopPage", () => {
 
     const mockState = {
       shop: {
-        isFetching: true
-      }
+        isFetching: true,
+      },
     };
 
     store = createMockStore({
       state: mockState,
-      reducers: { shop: mockReducer }
+      reducers: { shop: mockReducer },
     });
 
     mockFetchCollectionsStart = jest.fn();
 
     const mockMatch = {
-      path: ''
+      path: "",
     };
 
     const mockProps = {
       match: mockMatch,
-      fetchCollectionsStart: mockFetchCollectionsStart
+      fetchCollectionsStart: mockFetchCollectionsStart,
     };
 
     wrapper = mount(
@@ -60,11 +74,11 @@ describe("ShopPage", () => {
     );
   });
 
-  it('should render ShopPage', () => {
+  it("should render ShopPage", () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should fetch collections on mount', () => {
+  it("should fetch collections on mount", () => {
     expect(mockFetchCollectionsStart).toHaveBeenCalled();
-  })
+  });
 });

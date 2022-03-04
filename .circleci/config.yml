@@ -15,7 +15,7 @@ jobs:
       - checkout
       - run: echo "testing"
       - run: npm run install-packages
-      - run: npm test
+      - run: cd 'client' && npm run test
 workflows:
   version: 2.1
   build_and_test:
