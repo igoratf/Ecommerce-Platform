@@ -4,7 +4,7 @@ jobs:
     docker:
       - image: cimg/node:17.2.0
     steps:
-      - checkout 
+      - checkout
       - run: echo "npm installing"
       - run: npm run install-packages
       - run: CI=true npm run build
@@ -14,5 +14,11 @@ jobs:
     steps:
       - checkout
       - run: echo "testing"
-      - run: npm install
+      - run: npm run install-packages
       - run: npm test
+workflows:
+  version: 2.1
+  build_and_test:
+    jobs:
+      - build
+      - test
