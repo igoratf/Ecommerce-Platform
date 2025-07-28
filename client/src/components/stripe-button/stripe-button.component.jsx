@@ -1,43 +1,46 @@
-import React from 'react';
-import StripeCheckout from 'react-stripe-checkout';
-import crwnLogo from '../../assets/crwn.svg';
-import axios from 'axios';
+import React from "react";
+import StripeCheckout from "react-stripe-checkout";
+import crwnLogo from "../../assets/crwn.svg";
+import axios from "axios";
 
-const StripeCheckoutButton = ({price}) => {
-    const priceForStripe = price * 100;
-    const publishableKey = 'pk_test_l4aqe0SsS6G3f3sU9LLb7FeF00tdeLsfBr';
-    
-    const onToken = (token) => {
-        axios({
-            url:'payment',
-            method: 'post',
-            data: {
-                amount: priceForStripe,
-                token
-            }
-        })
-        .then(response => {
-            alert('Payment successful!');
-        })
-        .catch(error => {
-            console.log('Payment error: ', error);
-            alert('There was an issue with your payment. Please make sure you use the provided credit card.');
-        })
-    }
+const StripeCheckoutButton = ({ price }) => {
+  const priceForStripe = price * 100;
+  const publishableKey = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY;
 
-    return (
+  const onToken = (token) => {
+    axios({
+      url: "payment",
+      method: "post",
+      data: {
+        amount: priceForStripe,
+        token,
+      },
+    })
+      .then((response) => {
+        alert("Payment successful!");
+      })
+      .catch((error) => {
+        console.log("Payment error: ", error);
+        alert(
+          "There was an issue with your payment. Please make sure you use the provided credit card.",
+        );
+      });
+  };
+
+  return (
     <StripeCheckout
-    label='Pay Now'
-    name='E-commerce Clothing'
-    billingAddress 
-    shippingAddress
-    image={crwnLogo}
-    description={`Your total is $${price}`}
-    amount={priceForStripe}
-    panelLabel='Pay Now'
-    token={onToken}
-    stripeKey={publishableKey}/>
-    );
-}
+      label="Pay Now"
+      name="E-commerce Clothing"
+      billingAddress
+      shippingAddress
+      image={crwnLogo}
+      description={`Your total is $${price}`}
+      amount={priceForStripe}
+      panelLabel="Pay Now"
+      token={onToken}
+      stripeKey={publishableKey}
+    />
+  );
+};
 
 export default StripeCheckoutButton;

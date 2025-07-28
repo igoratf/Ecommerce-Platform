@@ -3,14 +3,14 @@ import "firebase/compat/firestore";
 import "firebase/compat/auth";
 
 const config = {
-  apiKey: "AIzaSyDXCYcIKQtbtmOYGUTattaOmP17oZ8yBZU",
-  authDomain: "ecommerce-crwn-db.firebaseapp.com",
-  databaseURL: "https://ecommerce-crwn-db.firebaseio.com",
-  projectId: "ecommerce-crwn-db",
-  storageBucket: "ecommerce-crwn-db.appspot.com",
-  messagingSenderId: "771237642203",
-  appId: "1:771237642203:web:5170694e852b159314b1fe",
-  measurementId: "G-07V6ML38QY",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
@@ -41,7 +41,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
 export const addCollectionAndDocuments = async (
   collectionKey,
-  objectsToAdd
+  objectsToAdd,
 ) => {
   const collectionRef = firestore.collection(collectionKey);
 
